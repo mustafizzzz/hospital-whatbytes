@@ -3,6 +3,18 @@ const app = express();
 const morgan = require('morgan');
 const colors = require('colors')
 const dotenv = require('dotenv')
+const sequelize = require('./config/database.js');
+
+
+// Test Database Connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("PostgreSQL Connected Successfully!".bgGreen.black);
+  })
+  .catch((err) => {
+    console.error("Error: Database Connection Failed!".bgRed, err);
+  });
 
 
 //ENV variables Configuration
@@ -14,11 +26,15 @@ app.use(morgan('dev'));
 
 
 
+
+
 //import routes
 const userRoutes = require('./routes/userRoutes.js')
 const patientRoutes = require('./routes/patientRoutes.js')
 const doctorRoutes = require('./routes/doctorRoutes.js')
-const patientDoctorRoutes = require('./routes/patientDoctorRoutes.js')
+const patientDoctorRoutes = require('./routes/patientDoctorRoutes.js');
+
+
 //routes
 app.use(`/api/v1/users`, userRoutes);
 app.use(`/api/v1/patients`, patientRoutes);
