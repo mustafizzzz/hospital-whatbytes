@@ -5,6 +5,11 @@ const colors = require('colors')
 const dotenv = require('dotenv')
 const sequelize = require('./config/database.js');
 
+app.set("trust proxy", 1);
+//ENV variables Configuration
+dotenv.config();
+
+
 
 // Test Database Connection
 sequelize
@@ -17,8 +22,7 @@ sequelize
   });
 
 
-//ENV variables Configuration
-dotenv.config();
+
 
 
 app.use(express.json());
